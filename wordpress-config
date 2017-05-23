@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby
+
+require 'etc'
+require_relative 'utils.rb'
+
+# mask the ugly stack trace
+Signal.trap('INT') do
+  Kernel.exit(0)
+end
+
+wordpress_dir = projects + '/wordpress'
+config_file = wordpress_dir + '/wp-config.php'
+
+system("subl #{config_file}")

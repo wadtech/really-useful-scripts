@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+require 'json'
+
+sample_size ||= 10
+interval    ||= 3600
+
+now = Time.now.getutc.to_i
+later = now + interval
+
+puts (now...later).to_a.sample(sample_size).sort

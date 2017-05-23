@@ -1,0 +1,19 @@
+#!/usr/bin/env ruby
+
+require 'securerandom'
+
+stuff = {}
+
+username, password = ARGV
+
+unless username
+ username = "your_username"
+end
+
+unless password
+  password = SecureRandom.urlsafe_base64(16) #=> "UtM7aa8"
+end
+
+pwd = `openssl passwd -1 #{password}`
+
+puts "#{username}\t#{password}\t#{pwd}"

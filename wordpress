@@ -1,0 +1,20 @@
+#!/usr/bin/env ruby
+
+require 'etc'
+require_relative 'utils.rb'
+
+# mask the ugly stack trace
+Signal.trap('INT') do
+  Kernel.exit(0)
+end
+
+wordpress_dir = projects + '/wordpress'
+
+Dir.chdir(wordpress_dir) do
+  port = find_open_port(3000, 4000)
+
+  router_file = copy_router(wordpress_dir) unless router_exists?(wordpress_dir)
+
+  system("$PHPBREW_PATH/php -S localhost:#{port} #{router_file}")
+end
+

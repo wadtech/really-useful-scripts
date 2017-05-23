@@ -1,0 +1,13 @@
+#!/usr/bin/env ruby
+
+require_relative 'utils.rb'
+
+Signal.trap('INT') do
+  Kernel.exit(0)
+end
+
+Dir.chdir(File.join(projects, 'tools', 'adminer')) do |path|
+  port = find_open_port(3001, 4000)
+
+  system("php -S localhost:#{port}")
+end
