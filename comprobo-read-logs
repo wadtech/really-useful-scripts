@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby
+require 'csv'
+          #        filename:line:reqid   date time  thread   level         file:line        - message
+pattern = /((?:\w|\.|-|\/)+:\d+):(\[.*\])\s(.+\s.+)\s(\[.*\])\s(\w+)\s+((?:\w|\.|-|\/)+:\d+)\s-\s(.*)/i
+
+csv_string = CSV.generate do |csv|
+  ARGF.each do |line|
+      matches = pattern.match line
+      next if matches == nil
+      csv << matches.to_a[1..-1]
+  end
+end
+
+puts csv_string
