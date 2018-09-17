@@ -7,7 +7,7 @@ Signal.trap('INT') do
 end
 
 Dir.chdir(File.join(projects, 'tools', 'adminer')) do |path|
-  port = find_open_port(3001, 4000)
+  port = find_open_port(3002, 4000)
 
   system("php -S localhost:#{port}")
 end
