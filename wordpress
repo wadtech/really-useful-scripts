@@ -11,10 +11,14 @@ end
 wordpress_dir = projects + '/wordpress'
 
 Dir.chdir(wordpress_dir) do
+  host = 'localhost'
+  if ARGV.length > 0
+    host = ARGV[0]
+  end
   port = find_open_port(3000, 4000)
 
   router_file = copy_router(wordpress_dir) unless router_exists?(wordpress_dir)
 
-  system("$PHPBREW_PATH/php -S localhost:#{port} #{router_file}")
+  system("$PHPBREW_PATH/php -S #{host}:#{port} #{router_file}")
 end
 

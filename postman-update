@@ -1,5 +1,15 @@
 #!/bin/bash
-wget https://dl.pstmn.io/download/latest/linux64 -O /tmp/postman.tar.gz
-sudo tar -xzf /tmp/postman.tar.gz -C /opt
-rm /tmp/postman.tar.gz
-sudo ln -fs /opt/Postman/Postman /usr/bin/postman
+
+POSTMAN_URL=https://dl.pstmn.io/download/latest/linux64
+POSTMAN_PARENT=/opt
+POSTMAN_DIR=$POSTMAN_PARENT/Postman
+EXE=/usr/bin/postman
+TMP_FILE=/tmp/postman.tar.gz
+
+wget $POSTMAN_URL -O $TMP_FILE
+sudo rm -r $POSTMAN_DIR
+sudo tar -xzf $TMP_FILE -C $POSTMAN_PARENT
+rm $TMP_FILE
+sudo chown -R $USER:$USER $POSTMAN_DIR
+chmod 777 -R $POSTMAN_DIR
+sudo ln -fs $POSTMAN_DIR $EXE
